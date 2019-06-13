@@ -25,7 +25,7 @@ SECRET_KEY = '*8_cm*e&q2)+$90ym5_)(mv&d6#7%ezrm6wc@)fw1434%x3$rt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['neelab.elec.fit.ac.jp']
 
 
 # Application definition
