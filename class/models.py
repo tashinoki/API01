@@ -30,3 +30,7 @@ class Class(models.Model):
     division = models.CharField(max_length=50)
     # 組
     classes = models.IntegerField()
+    # シラバス
+    syllabus = models.TextField(max_length=1000, null=True)
+    # 内容
+    content = models.TextField(max_length=1000, null=True)

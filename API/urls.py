@@ -20,4 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('users.urls')),
     path('class/', include('class.urls')),
+    path('token/', include('fit_token.urls')),
+    path('scrape/', include('scrape.urls')),
+    path('fetch/', include('fetch.urls'))
 ]

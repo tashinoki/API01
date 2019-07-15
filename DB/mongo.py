@@ -5,7 +5,7 @@ import urllib.parse
 username = urllib.parse.quote_plus('newmyfit')
 password = urllib.parse.quote_plus('jveuirgvTS')
 
-databasename = "newMyfit"
+database_name = "newMyfit"
 collection = "user_mst"
 
 # databasename = "myNewDatabase"
@@ -13,21 +13,21 @@ collection = "user_mst"
 client = MongoClient('localhost',
                      username=username,
                      password=password,
-                     authSource=databasename,
+                     authSource=database_name,
                      authMechanism='SCRAM-SHA-256')
 
-db = client[databasename]
+db = client[database_name]
 # db = client['myNewDatabase']
+
 
 class NewMyfit():
 
-  # user_mst collection
-  @staticmethod
-  def user_mst():
-    return db['user_mst']
+    # user_mst collection
+    @staticmethod
+    def user_mst():
+        return db['user_mst']
 
-
-  # stu_mst collection
-  @staticmethod
-  def stu_mst():
-    return db['stu_mst']
+    # stu_mst collection
+    @staticmethod
+    def stu_mst():
+        return db['stu_mst']

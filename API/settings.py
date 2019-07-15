@@ -25,14 +25,16 @@ SECRET_KEY = '*8_cm*e&q2)+$90ym5_)(mv&d6#7%ezrm6wc@)fw1434%x3$rt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['neelab.elec.fit.ac.jp']
-
+# デプロイ後にアクセスを受け付けるホスト名
+ALLOWED_HOSTS = ['neelab.elec.fit.ac.jp', '127.0.0.1', 'localhost']
 
 # Application definition
 
 INSTALLED_APPS = [
     'users',
     'class',
+    'fit_token',
+    'scrape',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,9 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',  # CORS対策
+    'django_celery_beat',
+    'django_celery_results'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',       # CORS対策
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,8 +56,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',  # CORS対策
-    'corsheaders.middleware.CorsMiddleware'       # CORS対策
 ]
+
+# SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 ROOT_URLCONF = 'API.urls'
 
@@ -125,5 +131,30 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # CORS対策
+
+
+CORS_ORIGIN_WHITELIST = (
+  # "127.0.0.1:4200",
+  "http://localhost:4200",
+)
+
+# 必要ないかも
+CORS_ALLOW_HEADERS = (
+  'accept',
+  'accept-encoding',
+  'authorization',
+  'content-type',
+  'dnt',
+  'origin',
+  'user-agent',
+  'x-csrftoken',
+  'x-requested-with',
+  'Access-Control-Allow-Origin'
+)
+
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
+
+# SESSION_COOKIE_DOMAIN = 'localhost:4200'
+
+CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/1')
